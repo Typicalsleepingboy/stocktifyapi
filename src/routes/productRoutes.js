@@ -13,13 +13,7 @@ const { uploadImage } = require('../middleware/uploadMiddleware');
 
 router.use(protect);
 
-router.route('/')
-    .get(getProducts)
-    .post(uploadImage, createProduct);
-
-router.route('/:id')
-    .get(getProductById)
-    .put(uploadImage, updateProduct)
-    .delete(deleteProduct);
+router.post('/', upload.single('image'), createProduct);
+router.put('/:id', upload.single('image'), updateProduct);
 
 module.exports = router;
